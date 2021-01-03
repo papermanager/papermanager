@@ -4,7 +4,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/papermanagertest/papermanagertest ':no-zoom')
 ![License](https://img.shields.io/github/license/papermanager/papermanager ':no-zoom')
 
-> Joomla 3 component & plugin.
+> Academic publication manager for Joomla! - Component & plugin.
 
 View complete [Documentation](https://papermanager.github.io/).
 
