@@ -12,4 +12,4 @@ Paper Manager is a Joomla 3 extension allowing the management of scientific publ
 
 ## License
 
-This project is licensed under the terms of the MIT license - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL-2.0 License - see the [LICENSE](LICENSE) file for details.
