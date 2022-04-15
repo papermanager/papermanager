@@ -2,7 +2,7 @@
 <extension type="component" version="4.1" method="upgrade">
 	<name>COM_PAPERMANAGER</name>
 	<creationDate>2022-04-01</creationDate>
-	<copyright>Copyright (C) 2014. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2014 - 2022. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE</license>
 	<author>Christos</author>
 	<authorEmail>-</authorEmail>

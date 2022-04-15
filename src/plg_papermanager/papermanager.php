@@ -1,9 +1,9 @@
 <?php
 /**
- * @version     0.0.1
- * @package     plg_content_papermanager
- * @copyright   Copyright (C) 2014. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     pkg_papermanager
+ * @copyright   Copyright (C) 2014 - 2022. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
+ * @link        https://papermanager.github.io/
  */
 
 defined('_JEXEC') or die;

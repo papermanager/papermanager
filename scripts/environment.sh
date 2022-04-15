@@ -1,13 +1,13 @@
 #!/bin/bash
 
-export VERSION=0.0.1
+export VERSION=1.0.0
 export CURRENT_YEAR=$(date +'%Y')
 
 export COM_NAME=com_papermanager
 export PLG_NAME=plg_papermanager
 export PKG_NAME=pkg_papermanager
 
-export META_CREATION_DATE="2014-04-01"
+export META_CREATION_DATE="2022-04-01"
 export META_COPYRIGHT="Copyright (C) 2014 - ${CURRENT_YEAR}. All rights reserved."
 export META_LICENSE="GNU General Public License version 2 or later; see LICENSE"
 export META_URL="https://papermanager.github.io/"

@@ -2,7 +2,7 @@
 <extension type="plugin" version="4.1" group="content" method="upgrade">
 	<name>PLG_CONTENT_PAPERMANAGER</name>
 	<creationDate>2022-04-01</creationDate>
-	<copyright>Copyright (C) 2014. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2014 - 2022. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE</license>
 	<author>Christos</author>
 	<authorEmail>-</authorEmail>
@@ -25,10 +25,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="style" type="list"
-					default="ul"
-					description="PLG_PAPERMANAGER_FIELD_STYLE_DESC"
-					label="PLG_PAPERMANAGER_FIELD_STYLE_LABEL">
+				<field name="style" type="list" default="ul" description="PLG_PAPERMANAGER_FIELD_STYLE_DESC" label="PLG_PAPERMANAGER_FIELD_STYLE_LABEL">
 					<option value="ul">PLG_PAPERMANAGER_FIELD_VALUE_UL</option>
 					<option value="ol">PLG_PAPERMANAGER_FIELD_VALUE_OL</option>
 					<option value="olreversed">PLG_PAPERMANAGER_FIELD_VALUE_OLREVERSED</option>
