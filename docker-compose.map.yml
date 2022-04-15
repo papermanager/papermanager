@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  joomla:
+    volumes:
+      - ./src/com_papermanager/admin:/var/www/html/administrator/components/com_papermanager
+      - ./src/com_papermanager/papermanager.xml:/var/www/html/administrator/components/com_papermanager/papermanager.xml
+      - ./src/com_papermanager/site:/var/www/html/components/com_papermanager
+      - ./src/plg_papermanager:/var/www/html/plugins/content/papermanager
+      - ./src/pkg_papermanager.xml:/var/www/html/administrator/manifests/packages/pkg_papermanager.xml

@@ -1,78 +1,79 @@
+SHELL := /bin/bash
+
 .DEFAULT_GOAL := help
 
-COM_NAME = com_papermanager
-PLG_NAME = plg_papermanager
-PKG_NAME = pkg_papermanager
-
-.PHONY: dev
-dev: clean
-	@echo -e "\n\n# Copying to build directory"
+.PHONY: up
+up: down volume
+	@echo -e "\n\n# Starting joomla"
 	@echo "============================="
-	mkdir build
-#	mkdir build/administrator
-#	mkdir build/administrator/components
-#	mkdir build/administrator/components/$(COM_NAME)
-	mkdir -p build/administrator/components/$(COM_NAME)
-	cp -ar src/$(COM_NAME)/admin/. build/administrator/components/$(COM_NAME)
-	cp -ar src/$(COM_NAME)/papermanager.xml build/administrator/components/$(COM_NAME)
-#	mkdir build/components
-#	mkdir build/components/$(COM_NAME)
-	mkdir -p build/components/$(COM_NAME)
-	cp -ar src/$(COM_NAME)/site/. build/components/$(COM_NAME)
-#	mkdir build/plugins
-#	mkdir build/plugins/content
-#	mkdir build/plugins/content/papermanager
-	mkdir -p build/plugins/content/papermanager
-	cp -ar src/$(PLG_NAME)/. build/plugins/content/papermanager
-#	mkdir build/administrator/manifests
-#	mkdir build/administrator/manifests/packages
-	mkdir -p build/administrator/manifests/packages
-	cp -ar src/$(PKG_NAME).xml build/administrator/manifests/packages
-	@echo -e "\n\n# Finished"
-	@echo "=========="
-	@echo "Files copied to development environment."
+	@source ./scripts/environment.sh && docker-compose -f docker-compose.yml up -d
+
+.PHONY: map
+map: down volume
+	@echo -e "\n\n# Starting joomla & Mapping files to joomla installation"
+	@echo "============================="
+	./scripts/map.sh
+	@source ./scripts/environment.sh && docker-compose -f docker-compose.yml -f docker-compose.map.yml up -d
+
+.PHONY: down
+down:
+	@echo -e "\n\n# Stopping joomla"
+	@echo "============================="
+	@source ./scripts/environment.sh && docker-compose down
+
+.PHONY: volume
+volume:
+	@echo -e "\n\n# Creating db volume if it doesn't exist"
+	@echo "============================="
+	docker volume create --name=joomladb_data
+
+.PHONY: copy
+copy: clean
+	@echo -e "\n\n# Copying files to joomla installation"
+	@echo "============================="
+	./scripts/copy.sh
 
 .PHONY: build
 build: clean
-	@echo -e "\n\n# Copying to build directory"
+	@echo -e "\n\n# Building package"
 	@echo "============================="
-	mkdir build
-	cp -a src/$(COM_NAME) build/$(COM_NAME)
-	cp -a src/$(PLG_NAME) build/$(PLG_NAME)
-	cp -a src/$(PKG_NAME).xml build/$(PKG_NAME).xml
-	find build/$(COM_NAME) -type d -not -path build/$(COM_NAME) -exec cp build/$(COM_NAME)/index.html {} \;
-	find build/$(PLG_NAME) -type d -not -path build/$(PLG_NAME) -exec cp build/$(PLG_NAME)/index.html {} \;
-	@echo -e "\n\n# Compressing from build directory"
+	./scripts/build.sh
+
+.PHONY: headers
+headers:
+	@echo -e "\n\n# Adding/updating copyright headers in ./src"
 	@echo "============================="
-	mkdir build/packages
-	cd build/$(COM_NAME);zip -r9 ../packages/$(COM_NAME).zip . -x \*.swp
-	cd build/$(PLG_NAME);zip -r9 ../packages/$(PLG_NAME).zip . -x \*.swp
-	rm -rf build/$(COM_NAME)
-	rm -rf build/$(PLG_NAME)
-	cd build;zip -r9 $(PKG_NAME).zip . -x \*.swp
-	rm -rf build/packages
-	rm -rf build/$(PKG_NAME).xml
-	@echo -e "\n\n# Finished"
-	@echo "=========="
-	@echo "Joomla package can be found in ./build directory."
+	@source ./scripts/environment.sh && php -f ./scripts/headers.php
 
 .PHONY: clean
 clean:
-	@echo -e "\n\n# Cleaning up build directory"
+	@echo -e "\n\n# Cleaning up ./dist directory"
 	@echo "============================="
-	rm -rf build
+	@source ./scripts/environment.sh && rm -rf "$${DIST_DIR:?}"
 
-.PHONY: watch
-watch:
-	while true; do \
-#		inotifywait -qr -e modify -e create -e delete -e move src; \
-		inotifywait -r -e modify -e create -e delete -e move src; \
-		make dev; \
-	done
+.PHONY: dependencies
+dependencies:
+	@echo -e "\n\n# Dependencies list"
+	@echo "============================="
+	./scripts/dependencies.sh
+
+#.PHONY: watch
+#watch:
+#	while true; do \
+##		inotifywait -qr -e modify -e create -e delete -e move src; \
+#		inotifywait -r -e modify -e create -e delete -e move src; \
+#		make dev; \
+#	done
 
 .PHONY: help
 help:
 	@echo "Available Targets: "
-	@echo "build - Create Joomla package."
-	@echo "clean - Clean build directory"
-	@echo "watch - Watch src directory for changes"
+	@echo "up      - Start joomla docker environment without mapping ./src files"
+	@echo "map     - Start joomla docker environment & Map ./src files to the joomla installation"
+	@echo "down    - Stop joomla docker environment"
+	@echo "copy    - Copy files to development environment"
+	@echo "build   - Create Joomla package. (in ./dist)"
+	@echo "clean   - Clean ./dist directory"
+	@echo "headers - Add/update copyright headers + XML metadata in ./src"
+#	@echo "watch - Watch ./src directory for changes"
+	@source ./scripts/environment.sh && echo "$${META_HEADER_COPYRIGHT_TEXT}"

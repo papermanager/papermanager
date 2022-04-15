@@ -8,4 +8,10 @@ nbproject
 vendor
 node_modules
 
-build
+dist
+
+!/docker/www/
+/docker/www/**
+!/docker/www/.gitkeep
+
+/src/com_papermanager/admin/papermanager.xml

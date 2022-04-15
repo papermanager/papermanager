@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  joomla:
+    #image: joomla:4.1.2-php8.0-apache
+    build: ./docker/php/
+    #restart: always
+    links:
+      - joomladb:mysql
+    environment:
+      JOOMLA_DB_HOST: joomladb
+      JOOMLA_DB_USER: root
+      JOOMLA_DB_PASSWORD: example
+      JOOMLA_DB_NAME: mydb
+      #XDEBUG_CONFIG: remote_host=host.docker.internal
+    ports:
+      - 8080:80
+    volumes:
+      - ${JOOMLA_INSTALLATION_DIR}:/var/www/html
+
+  joomladb:
+    image: mysql:5.6
+    #restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      #MYSQL_USER: exampleuser
+      #MYSQL_PASSWORD: -
+      #MYSQL_DATABASE: -
+    ports:
+      - 3306
+    volumes:
+      #- "./docker/data-db:/var/lib/mysql"
+      - joomladb_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.9.7
+    depends_on:
+      - joomladb
+    ports:
+      - "81:80"
+    environment:
+      - PMA_HOST=joomladb
+
+volumes:
+  joomladb_data:
+    external: true
