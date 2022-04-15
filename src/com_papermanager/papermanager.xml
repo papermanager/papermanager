@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="4.1" method="upgrade">
+	<name>COM_PAPERMANAGER</name>
+	<creationDate>2022-04-01</creationDate>
+	<copyright>Copyright (C) 2014. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE</license>
+	<author>Christos</author>
+	<authorEmail>-</authorEmail>
+	<authorUrl>https://papermanager.github.io/</authorUrl>
+	<version>1.0.0</version>
+	<description>COM_PAPERMANAGER_DESC</description>
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>papermanager.php</filename>
+		<!--
+		<filename>controller.php</filename>
+		<filename>router.php</filename>
+		<folder>views</folder>
+		<folder>models</folder>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>language</folder>
+		-->
+	</files>
+	<!--
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB.com_papermanager.ini</language>
+		<language tag="el-GR">language/el-GR.com_papermanager.ini</language>
+	</languages>
+	-->
+	<administration>
+		<menu img="components/com_papermanager/assets/images/s_com_papermanager.png">COM_PAPERMANAGER</menu>
+		<submenu>
+			<!--
+			<menu link="option=com_papermanager&amp;view=papers" view="papers" img="components/com_papermanager/assets/images/s_papers.png" alt="Papermanager/Papers">COM_PAPERMANAGER_TITLE_PAPERS</menu>
+			<menu link="option=com_papermanager&amp;view=authors" view="authors" img="components/com_papermanager/assets/images/s_authors.png" alt="Papermanager/Authors">COM_PAPERMANAGER_TITLE_AUTHORS</menu>
+			<menu link="option=com_papermanager&amp;view=categories" view="categories" img="components/com_papermanager/assets/images/s_categories.png" alt="Papermanager/Categories">COM_PAPERMANAGER_TITLE_CATEGORIES</menu>
+			-->
+			<menu view="papers" img="components/com_papermanager/assets/images/s_papers.png" alt="Papermanager/Papers">COM_PAPERMANAGER_TITLE_PAPERS</menu>
+			<menu view="authors" img="components/com_papermanager/assets/images/s_authors.png" alt="Papermanager/Authors">COM_PAPERMANAGER_TITLE_AUTHORS</menu>
+			<menu view="categories" img="components/com_papermanager/assets/images/s_categories.png" alt="Papermanager/Categories">COM_PAPERMANAGER_TITLE_CATEGORIES</menu>
+		</submenu>
+		<files folder="admin">
+			<!--
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			-->
+			<filename>index.html</filename>
+			<filename>papermanager.php</filename>
+			<!--
+			<folder>controllers</folder>
+			<folder>assets</folder>
+			<folder>helpers</folder>
+			<folder>models</folder>
+			-->
+			<folder>sql</folder>
+			<!--
+			<folder>tables</folder>
+			<folder>views</folder>
+			-->
+			<folder>language</folder>
+		</files>
+		<!--
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/en-GB.com_papermanager.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_papermanager.sys.ini</language>
+			<language tag="el-GR">language/el-GR/el-GR.com_papermanager.ini</language>
+			<language tag="el-GR">language/el-GR/el-GR.com_papermanager.sys.ini</language>
+		</languages>
+		-->
+	</administration>
+</extension>

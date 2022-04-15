@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="package" version="4.1" method="upgrade">
+	<name>Paper Manager - Package</name>
+	<creationDate>2022-04-01</creationDate>
+	<packagename>papermanager</packagename>
+	<copyright>Copyright (C) 2014 - 2022. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE</license>
+	<author>Christos</author>
+	<authorEmail>-</authorEmail>
+	<authorUrl>https://papermanager.github.io/</authorUrl>
+	<version>1.0.0</version>
+	<url>https://papermanager.github.io/</url>
+	<packager>Christos</packager>
+	<packagerurl>https://papermanager.github.io/</packagerurl>
+	<description>A component and plugin to manage scientific publications</description>
+	<blockChildUninstall>true</blockChildUninstall>
+	<files folder="packages">
+		<file type="component" id="papermanager">com_papermanager.zip</file>
+		<file type="plugin" id="papermanager" group="content">plg_papermanager.zip</file>
+	</files>
+	<updateservers>
+		<server type="extension" priority="1" name="Paper Manager Updates">https://raw.githubusercontent.com/papermanager/papermanager/main/updates/extension.xml</server>
+	</updateservers>
+</extension>
