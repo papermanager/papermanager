@@ -65,6 +65,25 @@ dependencies:
 #		make dev; \
 #	done
 
+.PHONY: lint
+lint:
+	@echo -e "\n\n# Lint"
+	@echo "============================="
+	@$(MAKE) --no-print-directory _lint-php-cs-fixer
+	@$(MAKE) --no-print-directory _lint-phpcs
+
+.PHONY: _lint-php-cs-fixer
+_lint-php-cs-fixer:
+	@echo -e "\n\n# PHP CS Fixer"
+	@echo "============================="
+	docker-compose -f docker-compose.quality.yml run --rm php-cs-fixer
+
+.PHONY: _lint-phpcs
+_lint-phpcs:
+	@echo -e "\n\n# PHP CodeSniffer"
+	@echo "============================="
+	docker-compose -f docker-compose.quality.yml run --rm phpcs
+
 .PHONY: help
 help:
 	@echo "Available Targets: "
@@ -76,4 +95,5 @@ help:
 	@echo "clean   - Clean ./dist directory"
 	@echo "headers - Add/update copyright headers + XML metadata in ./src"
 #	@echo "watch - Watch ./src directory for changes"
+	@echo "lint    - Run PHP lint tools (PHP CS Fixer, PHP CodeSniffer)"
 	@source ./scripts/environment.sh && echo "$${META_HEADER_COPYRIGHT_TEXT}"

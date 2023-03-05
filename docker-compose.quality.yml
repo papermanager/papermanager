@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  php-cs-fixer:
+    image: cytopia/php-cs-fixer:3-php8.0
+    #environment:
+      #XDEBUG_CONFIG: remote_host=host.docker.internal
+    volumes:
+      - .:/data
+    #entrypoint: ["php-cs-fixer", "fix", "--config=.php-cs-fixer.dist.php", "--dry-run", "--show-progress=dots", "--ansi", "--diff", "-vv", "."]
+    entrypoint: ["php-cs-fixer", "fix", "--config=.php-cs-fixer.dist.php", "--dry-run", "--show-progress=dots", "--ansi", "--diff", "-vv"]
+
+  phpcs:
+    image: cytopia/phpcs:3-php8.0
+    #environment:
+      #XDEBUG_CONFIG: remote_host=host.docker.internal
+    volumes:
+      - .:/data
+    #entrypoint: ["phpcs", "--standard=PSR12", "--report=full", "--report-width=120", "--colors", "-p", "-s", "."]
+    entrypoint: ["phpcs"]

@@ -8,6 +8,9 @@ nbproject
 vendor
 node_modules
 
+.php-cs-fixer.cache
+.phpcs.cache
+
 dist
 
 !/docker/www/
